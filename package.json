@@ -1,0 +1,16 @@
+{
+    "name": "github-maven-proxy",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "bun run --hot src/index.ts",
+        "start": "bun run src/index.ts",
+        "docker": "docker buildx build --platform ${DOCKER_PLATFORMS:-linux/$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')} -t ghcr.io/vegidio/gh-maven-proxy:latest . --build-arg VERSION=${VERSION:-local} ${DOCKER_BUILD_OPTS:---load}"
+    },
+    "dependencies": {
+        "hono": "^4.12.5"
+    },
+    "devDependencies": {
+        "@types/bun": "latest"
+    }
+}
