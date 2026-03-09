@@ -1,0 +1,15 @@
+GitHub Maven Proxy has been deployed!
+
+This chart provides the base deployment (Deployment + Service + Ingress).
+Ingress is disabled by default. To enable it, set ingress.enabled=true and configure
+hostnames and TLS in your GitOps repository values.
+
+To test the application locally:
+
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "gh-proxy.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:8080
+
+Then visit http://127.0.0.1:8080 in your browser.
+
+For environment-specific configuration (Ingress, HPA, resources, etc.),
+see the README for GitOps deployment examples.
