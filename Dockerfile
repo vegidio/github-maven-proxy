@@ -10,7 +10,9 @@ COPY src/ ./src/
 RUN bun build --compile --minify src/index.ts --outfile proxy
 
 # Stage 2: Minimal runtime image
-FROM debian:bookworm-slim
+FROM alpine
+
+RUN apk add --no-cache libstdc++
 
 WORKDIR /app
 
